@@ -1,30 +1,38 @@
 import React from 'react'
+import { useSelector, useDispatch } from 'react-redux'
+import { decrement, increment } from './redux/slices/filterSlice'
+import { BrowserRouter, Routes, Route, Link } from 'react-router-dom'
 import './scss/app.scss'
-import Header from './components/Header'
-import Categories from './components/Categories.jsx'
-import Sort from './components/Sort.jsx'
-import PizzaBlock from './components/PizzaBlock'
 
-import pizzas from './assets/pizzas.json'
+import Header from './components/Header'
+import Home from './pages/Home'
+import NotFound from './pages/NotFound'
+import Cart from './pages/Cart'
+
+// import pizzas from './assets/pizzas.json'
+
+const pizzas = []
+
+export const SearchContext = React.createContext()
 
 function App() {
+  const [searchValue, setSearchValue] = React.useState('')
+
   return (
     <div className="wrapper">
-      <Header />
-      <div className="content">
-        <div className="container">
-          <div className="content__top">
-            <Categories />
-            <Sort />
-          </div>
-          <h2 className="content__title">Все пиццы</h2>
-          <div className="content__items">
-            {pizzas.map(obj => (
-              <PizzaBlock {...obj} />
-            ))}
+      <SearchContext.Provider value={{ searchValue, setSearchValue }}>
+        <Header />
+        <div className="content">
+          <div className="container">
+            <Routes>
+              <Route path="/" element={<Home />} />
+              <Route path="/cart.html" element={<Cart />} />
+              <Route path="*" element={<NotFound />} />
+              {/* <NotFound /> */}
+            </Routes>
           </div>
         </div>
-      </div>
+      </SearchContext.Provider>
     </div>
   )
 }

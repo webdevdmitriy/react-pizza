@@ -1,0 +1,17 @@
+.root {
+  li {
+    display: inline-flex;
+  }
+  a {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    padding: 10px;
+    border: 1px solid #666;
+    height: 45px;
+    width: 45px;
+    border-radius: 30px;
+    margin-right: 10px;
+    cursor: pointer;
+  }
+}
