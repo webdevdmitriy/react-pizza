@@ -36,18 +36,26 @@ const Home = () => {
   //   sortProperty: 'rating',
   // })
 
-  React.useEffect(() => {
+  const fetchPizzas = async () => {
     const search = searchValue ? `&search=${searchValue}` : ''
-    axios
-      .get(
-        `https://63480c73db76843976b90f11.mockapi.io/items?page=${currentPage}&limit=4&${
-          categoryId > 0 ? `category=${categoryId}` : ''
-        }&sortBy=${sortType}${search}`
-      )
-      .then(res => {
-        setItems(res.data)
-        setIsLoading(true)
-      })
+    // await axios
+    //   .get(
+    //     `https://63480c73db76843976b90f11.mockapi.io/items?page=${currentPage}&limit=4&${
+    //       categoryId > 0 ? `category=${categoryId}` : ''
+    //     }&sortBy=${sortType}${search}`
+    //   )
+
+    const res = await axios.get(
+      `https://63480c73db76843976b90f11.mockapi.io/items?page=${currentPage}&limit=4&${
+        categoryId > 0 ? `category=${categoryId}` : ''
+      }&sortBy=${sortType}${search}`
+    )
+    setItems(res.data)
+    setIsLoading(true)
+  }
+
+  React.useEffect(() => {
+    fetchPizzas()
   }, [categoryId, sortType, searchValue, currentPage])
   return (
     <>
