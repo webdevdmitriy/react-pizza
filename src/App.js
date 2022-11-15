@@ -8,6 +8,7 @@ import Header from './components/Header'
 import Home from './pages/Home'
 import NotFound from './pages/NotFound'
 import Cart from './pages/Cart'
+import FullPizza from './pages/FullPizza'
 
 // import pizzas from './assets/pizzas.json'
 
@@ -27,6 +28,7 @@ function App() {
             <Routes>
               <Route path="/" element={<Home />} />
               <Route path="/cart.html" element={<Cart />} />
+              <Route path="/pizza/:id/" element={<FullPizza />} />
               <Route path="*" element={<NotFound />} />
               {/* <NotFound /> */}
             </Routes>
